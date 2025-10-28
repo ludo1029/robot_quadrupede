@@ -29,52 +29,6 @@ Le robot utilise des **valeurs d’amplitude spécifiques** pour chaque servo, a
 
 ---
 
-## 💻 Code Arduino
-
-### Bibliothèques nécessaires
-```cpp
-#include <Wire.h>
-#include <Adafruit_PWMServoDriver.h>
-
-Adafruit_PWMServoDriver pca = Adafruit_PWMServoDriver();
-
-#define SERVOMIN 150
-#define SERVOMAX 600
-
-void setup() {
-  Serial.begin(9600);
-  Serial.println("Initialisation du robot quadrupède...");
-  pca.begin();
-  pca.setPWMFreq(50);
-  delay(500);
-}
-
-// Exemple de fonctions (à définir dans le code complet)
-void leverPos(int servo, int angle);
-void avancerPos(int servo, int angle);
-void parallelMove(int servoA, int angleA, int servoB, int angleB);
-
-void loop() {
-  // --- Patte 1 (avant droite) ---
-  leverPos(4, 500);          // Lever la patte
-  delay(200);
-  avancerPos(0, 350);        // Avancer patte
-  delay(200);
-  leverPos(4, 400);          // Reposer patte
-  delay(200);
-
-  // --- Patte 3 (arrière gauche) ---
-  leverPos(9, 225);
-  delay(200);
-  avancerPos(15, SERVOMIN);
-  delay(200);
-
-  // --- Mouvement simultané expérimental ---
-  parallelMove(15, 350, 0, SERVOMIN);
-  delay(300);
-}
-```
-
 > 🚧 Le robot peut lever et avancer chaque patte, mais la marche complète reste en développement.  
 > Le projet est **en travaux** et évoluera au fur et à mesure des tests.
 > 📦 *Ce dépôt est en constante évolution. Suivez les commits pour suivre les progrès du robot quadrupède !*
